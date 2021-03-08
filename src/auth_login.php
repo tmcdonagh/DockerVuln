@@ -12,17 +12,19 @@ if($mysqli === false){
 }
 
 // Escape user inputs for security
-$subUser = $mysqli->real_escape_string($_REQUEST['username']);
-$subPass = $mysqli->real_escape_string($_REQUEST['password']);
+//$subUser = $mysqli->real_escape_string($_REQUEST['username']);
+//$subPass = $mysqli->real_escape_string($_REQUEST['password']);
+$subUser = $_REQUEST['username'];
 
 date_default_timezone_set("America/Chicago");
 $time = date("Y/m/d h:i:s a");
 
 // Attempt insert query execution
-$sql = "INSERT INTO users (username, password, time) VALUES('$subUser', '$subPass', '$time')";
+$sql = "INSERT INTO users (name, time) VALUES('$subUser', '$time')";
 if($mysqli->query($sql) === true){
   //echo "Records inserted successfully.";
-  echo file_get_contents("failed.html");
+  //echo file_get_contents("failed.html");
+  echo file_get_contents("index.html");
 
 } else{
   echo "ERROR: Could not execute $sql. " . $mysqli->error;
